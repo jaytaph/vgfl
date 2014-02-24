@@ -1,3 +1,24 @@
+/**
+ * Simple capture the flag.
+ *
+ * [+] Will set up 2 teams (blue and red).
+ *
+ * [+] Each team has a flag, randomly placed somewhere on their half of the map.
+ *
+ * The red team (AI) will walk randomly along, trying to find the flag. The human team (blue) does
+ * the same.
+ *
+ * (+) When you find the other teams flag, you must try and pick up the flag. As soon as you pick up
+ * the other teams flag you have won the game.
+ *
+ * (+) You cannot pick up the flag from another team.
+ *
+ * If a member of another team fires is within 25 meters to another player, both players are disabled
+ * for 2 minutes.
+ *
+ */
+
+
 /* Create game */
 var game = VGFL.game("capture the flag", {
     boxed : false,                                  // Continuous game
@@ -37,11 +58,13 @@ CtfFlag = VGFL.Object.extend({
 
 var red_flag = new CtfFlag({
     name : "red team flag",
-    coords : game.getRandomCoord()
+    coords : game.getRandomCoordInSector(4, [1,2,3,4]),
+    team: red_team
 });
 var blue_flag = new CtfFlag({
     name : "blue team flag",
-    coords : game.getRandomCoord()
+    coords : game.getRandomCoordInSector(4, [13,14,15,16]),
+    team: blue_team
 });
 
 
